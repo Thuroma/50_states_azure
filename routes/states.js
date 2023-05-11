@@ -15,6 +15,13 @@ router.get('/states', function(req, res, next) {
     .catch( err => next(err) )
 })
 
+// Fetch only states that have been visited
+router.get('/states/visited', function(req, res, next) {
+    States.findAll({ where: {visited: true}, order: ['name']}).then( statesVisited => {
+        return res.json(statesVisited)
+    })
+})
+
 // Get - get all info about one state
 // state/California or state/Iowa
 router.get('/state/:name', function(req, res, next) {

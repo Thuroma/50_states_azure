@@ -52,10 +52,12 @@ export default {
                 this.state = state
                 // Signifies the data is ready
                 this.dataReady = true
+                this.setMapView()
             }).catch( err => {
                 // 404 not found
                 if ( err.response && err.response.status === 404 ) {
-                    this.state.name = '?' // todo think about a better way to communicate to the user
+                    // Programmatically navigate to the Not Found page
+                    this.$router.push({ name: 'NotFound' })
                 } else {
                     // 500 server error
                     alert('Sorry, error fetching data about this state')    // generic message for user
